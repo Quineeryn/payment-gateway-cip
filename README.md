@@ -37,9 +37,18 @@ cp .env.example .env
 
 ### 2. Run menggunakan Docker Compose
 
+**Default (tanpa Kafka):**
 ```bash
 docker-compose up --build
 ```
+
+**Dengan Kafka (opsional):**
+```bash
+docker-compose --profile optional up --build
+```
+
+> Kafka bersifat opsional. Secara default (`KAFKA_ENABLED=false`), aplikasi tetap berjalan penuh tanpa Kafka — event transaksi tidak akan dipublish ke topic. Gunakan flag `--profile optional` hanya jika ingin menjalankan Kafka + Zookeeper.
+
 Aplikasi akan jalan di `http://localhost:8080`.
 
 ### 3. API Documentation
@@ -78,4 +87,5 @@ Sistem akan berhasil melakukan debit di bank, namun sengaja dibuat gagal saat ke
 - **Database**: PostgreSQL (Migrations menggunakan Flyway)
 - **Framework**: Spring Boot 3.3.x
 - **Resilience**: Resilience4j (Circuit Breaker & Retry)
+- **Messaging**: Apache Kafka (opsional, via `--profile optional`)
 
